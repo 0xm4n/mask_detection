@@ -1,0 +1,47 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+CREATE SCHEMA IF NOT EXISTS `ece1779a1` DEFAULT CHARACTER SET utf8 ;
+USE `ece1779a1`; 
+
+CREATE TABLE IF NOT EXISTS `ece1779a1`.`user`(
+	`UserID` INT NOT NULL AUTO_INCREMENT,
+	`Username` VARCHAR(50) NOT NULL,
+	`Password` VARCHAR(150) NOT NULL, 
+    PRIMARY KEY (`UserID`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `ece1779a1`.`images`(
+	`ImageID` INT NOT NULL AUTO_INCREMENT,
+    `ImagePath` VARCHAR(150) NOT NULL,
+    `UploadTime` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`ImageID`)
+)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `ece1779a1`.`user_with_images`(
+	`user_ID` INT NOT NULL,
+    `ImageName` VARCHAR (150) NOT NULL,
+    `user_UserID` INT NOT NULL,
+    `images_ImageID` INT NOT NULL,
+    PRIMARY KEY (`user_ID`, `ImageName`),
+    INDEX `fk_user_with_images_user_idx` (`user_UserID` ASC),
+    INDEX `fk_user_with_images_imgs_idx` (`images_ImageID` ASC),
+    CONSTRAINT `fk_user_with_images_user`
+      FOREIGN KEY (`user_UserID`)
+      REFERENCES `ece1779a1`.`user`(`UserID`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+	CONSTRAINT `fk_user_with_images_imgs`
+      FOREIGN KEY (`images_ImageID`)
+      REFERENCES `ece1779a1`.`images`(`ImageID`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+)
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
