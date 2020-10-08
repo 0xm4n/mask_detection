@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Object Detection</title>
+{% endblock %}
+
+
+{% block body %}
+<div>
+    <div>
+        <br>
+        <br>
+        <h2>Start by uploading a photo!</h2>
+        <br>
+    </div>
+    
+    <div>   
+        <form action="{{url_for('detection2')}}" method='POST' enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            {{ form.photo }}
+            {{ form.submit( class="btn btn-primary") }}
+        </form>
+    </div>
+
+
+
+
+
+    <!-- <div id="upload-btn" class="btn btn-lg btn-success btn-file-input">
+        <span><i class="fa fa-file-picture-o"></i> Upload a photo</span>
+        <input id="file-upload" type="file" accept="image/*">
+    </div> -->
+
+
+    <!-- <div>
+        <br>
+        <br>
+        <form method="post" action="http://localhost:5000/up_photo" enctype="multipart/form-data">
+            <input type="file" size="30" name="img"/> -->
+            <!-- <input type="text" class="txt_input" name="name" style="margin-top:15px;"/> -->
+            <!-- <input type="submit" value="Upload" class="button-new" style="margin-top:15px;"/>
+        </form>
+    </div> -->
+</div>
+
+
+
+{% endblock %}

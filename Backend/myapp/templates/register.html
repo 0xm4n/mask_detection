@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<title>Register</title>
+{% endblock %}
+
+
+{% block body %} 
+<div class="register">
+    <div>
+        <br>
+        <h1>Register</h1>
+    </div>
+    <div>
+        <form action="{{ url_for('register')}}" method="POST">
+            <!-- {{form.csrf_token()}} -->
+            {{ form.hidden_tag() }}
+            <br>
+            {{ form.username.label }}
+            <br>
+            {{ form.username }}
+            <br>
+            {{ form.email.label }}
+            <br>
+            {{ form.email }}
+            <br>
+            {{ form.password.label }}
+            <br>
+            {{ form.password }}
+            <br>
+            {{ form.confirm.label }}
+            <br>
+            {{ form.confirm }}
+            <br>
+            <hr>
+            {{ form.submit }}
+            <br><br>
+            <a href="{{ url_for('login') }}">Sign in to an existing account</a>
+        </form>
+    </div>
+</div>
+
+   
+{% endblock %}
