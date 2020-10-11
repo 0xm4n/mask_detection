@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Find Your Account</h2>
+    <div>
+        <p>Please enter your email or phone number to search for your account.</p>
+    </div>
+    <form action="{{ url_for('oauth.forget_password')}}" method="POST">
+        {{ form.username(placeholder="Username") }}
+        <br>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <span style="color: #c62928">{{ message }}</span>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <br>
+        {{ form.search }}
+    </form>
+    <br><br>
+    <a href="{{ url_for('oauth.login')}}">Cancel</a>
+
+</body>
+</html>

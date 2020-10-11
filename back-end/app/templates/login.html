@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div>
+        <h2 class="title">Mask Detection</h2>
+        <form action="{{ url_for('oauth.login')}}" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.username(placeholder="Username") }}
+            <br>
+            <br>
+            {{ form.password(placeholder="Password") }}
+            <br>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <span style="color: #c62928">{{ message }}</span>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <br>
+            {{ form.submit }}
+        </form>
+        <a href="{{ url_for('oauth.forget_password')}}">Forgot Password?</a>
+    </div>
+{% endblock %}
