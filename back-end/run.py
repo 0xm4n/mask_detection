@@ -1,5 +1,5 @@
 from app import create_app
 
-mt = create_app()
+mask_detection = create_app()
 
-mt.run(host='localhost', debug=True)
+mask_detection.run(host='localhost', debug=True)

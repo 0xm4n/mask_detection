@@ -19,20 +19,15 @@ class User(db.Model):
     id = Column(Integer, primary_key=True)
     username = Column(String(80), unique=True, nullable=False)
     email = Column(String(255), unique=True)
-    _password = Column('password', String(100))
+    password = Column(db.String(255))
 
     role = Column(SmallInteger, default=0)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
-    @property
-    def password(self):
-        return self._password
-
     def check_password(self, raw):
-        if not self._password:
+        if not self.password:
             return False
-        return check_password_hash(self._password, raw)
+        return check_password_hash(self.password, raw)
 
-    @password.setter
     def update_password(self, new_password):
         self.password = generate_password_hash(new_password)

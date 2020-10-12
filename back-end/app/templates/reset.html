@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mask Detection</title>
+</head>
+<body>
+    <h2>Change Password for @{{name}}</h2>
+    <form action="{{ url_for('oauth.reset_password', name=name)}}" method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.old_password.label }}<br>
+        {{ form.old_password() }}<br><br>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <span style="color: #c62928">{{ message }}</span>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {{ form.new_password.label }}<br>
+        {{ form.new_password() }}<br><br>
+
+        {{ form.confirm.label }}<br>
+        {{ form.confirm() }}<br><br>
+
+        {{ form.submit }}
+    </form>
+</body>
+</html>

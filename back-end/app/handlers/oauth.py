@@ -5,7 +5,7 @@ from flask_login import login_required, logout_user
 from ..models import db
 from ..models.user import User
 from .forms.login import LoginForm
-from .forms.recover import SearchAccountForm
+from .forms.recover import SearchAccountForm, ResetPasswordForm
 
 bp = Blueprint('oauth', __name__, template_folder='../templates')
 
@@ -40,16 +40,37 @@ def forget_password():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None:
             flash(u'No Search Results', category='error')
-        flash(u'111', category='error')
+            flash(u'Your search did not return any results. Please try again with other information.', category='error')
+        else:
+            reset_form = ResetPasswordForm()
+            return render_template('reset.html', form=reset_form, name=user.username)
     return render_template('recover.html', form=form)
 
 
-@bp.route('/reset-password')
-def reset_password():
-    return 'success'
+@bp.route('/reset-password/<string:name>', methods=['GET', 'POST'])
+def reset_password(name):
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        if form.new_password.data != form.confirm.data:
+            flash(u'Passwords must match')
+        else:
+            user = User.query.filter_by(username=name).first()
+            if not user.check_password(form.old_password.data):
+                flash(u'Password is not correct')
+            else:
+                user.update_password(form.new_password.data)
+                db.session.commit()
+                flash('Your Password has been reset.')
+                return redirect(url_for('oauth.login'))
+    return render_template('reset.html', form=form, name=name)
 
 
 @bp.route('/sign-up')
 @login_required
 def sign_up():
     return 'success'
+
+
+@bp.route('/test')
+def test():
+    return render_template('nav_bar.html')
