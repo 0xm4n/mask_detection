@@ -1,26 +1,103 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block style %}
+<style>
+    body {
+        background-image: radial-gradient(closest-side at 50% 135%, #ffffff 50%, #eceff1 100%);
+    }
 
-    <div>
-        <h2 class="title">Mask Detection</h2>
+    .sign-in-box {
+        width: 400px;
+        background: white;
+        padding: 40px 0 33px 0;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        border: 1px solid #eeeeee;
+        margin: 0 auto;
+    }
+
+    .sign-in-container {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    .text-title {
+        font-family: Comic Sans MS, cursive, sans-serif;
+        margin-bottom: 10px;
+    }
+
+    .form-input {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #546e7a;
+        border: 1px solid #cfd8dc;
+        border-radius: 3px;
+        font-weight: 300;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        -webkit-transition: 0.4s all;
+        -o-transition: 0.4s all;
+        transition: 0.4s all;
+        padding: 8.85px 13px;
+        font-size: 14px;
+    }
+
+    .submit_btn {
+        width: 100%;
+        padding: 0 13px;
+        border: 0;
+        color: #ffffff;
+        background: transparent;
+        height: 40px;
+        background: linear-gradient(215deg, #546e7a, #37474f);
+        margin-bottom: 16px;
+    }
+
+    .action-reset {
+        text-align: right
+    }
+
+    .reset-link {
+        color: #546e7a;
+        font-size: 14px;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="h-25"></div>
+<div class="d-flex justify-content-center align-items-center sign-in-box">
+    <div class="sign-in-container" style="text-align: center">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" width="75" height="77"
+             class="d-inline-block " alt="logo" loading="lazy">
+        <h2 class="text-title">Mask Detection</h2>
         <form action="{{ url_for('oauth.login')}}" method="POST">
             {{ form.hidden_tag() }}
-            {{ form.username(placeholder="Username") }}
+            {{ form.username(placeholder="Username", class_="form-input") }}
             <br>
             <br>
-            {{ form.password(placeholder="Password") }}
+            {{ form.password(placeholder="Password", class_="form-input") }}
             <br>
             {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                {% for message in messages %}
-                  <span style="color: #c62928">{{ message }}</span>
-                {% endfor %}
-              {% endif %}
+            {% if messages %}
+            {% for message in messages %}
+            <span style="color: #c62928">{{ message }}</span>
+            {% endfor %}
+            {% endif %}
             {% endwith %}
             <br>
-            {{ form.submit }}
+            {{ form.submit(class_="submit_btn") }}
         </form>
-        <a href="{{ url_for('oauth.forget_password')}}">Forgot Password?</a>
+        <div class="action-reset">
+            <a class="reset-link" href="{{ url_for('oauth.forget_password')}}">Forgot Password?</a>
+        </div>
     </div>
+
+</div>
 {% endblock %}

@@ -1,32 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Mask Detection</title>
-</head>
-<body>
-    <h2>Change Password for @{{name}}</h2>
-    <form action="{{ url_for('oauth.reset_password', name=name)}}" method="POST">
-        {{ form.hidden_tag() }}
+{% extends 'base.html' %}
 
-        {{ form.old_password.label }}<br>
-        {{ form.old_password() }}<br><br>
+{% block style %}
+<style>
+    body {
+        background-image: radial-gradient(closest-side at 50% 135%, #ffffff 50%, #eceff1 100%);
+    }
 
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
+    .reset-box {
+        width: 500px;
+        background: white;
+        padding: 40px 0 40px 0;
+        border-radius: 3px;
+        -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        border: 1px solid #eeeeee;
+        margin: 0 auto;
+    }
+
+    .reset-container {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-input {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #546e7a;
+        border: 1px solid #cfd8dc;
+        border-radius: 3px;
+        font-weight: 300;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        -webkit-transition: 0.4s all;
+        -o-transition: 0.4s all;
+        transition: 0.4s all;
+        padding: 8.85px 13px;
+        font-size: 14px;
+        margin: 8px 0;
+    }
+
+        .submit_btn {
+        margin-top: 12px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="h-25"></div>
+<div class="d-flex justify-content-center align-items-center reset-box">
+    <div class="reset-container" style="text-align: left">
+        <h3>Change password for @{{name}}</h3>
+        <hr>
+        <form action="{{ url_for('oauth.reset_password', name=name)}}" method="POST">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.old_password(placeholder="Old password", class_="form-input") }}
+
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
             {% for message in messages %}
-              <span style="color: #c62928">{{ message }}</span>
+            <span style="color: #c62928">{{ message }}</span>
             {% endfor %}
-          {% endif %}
-        {% endwith %}
+            {% endif %}
+            {% endwith %}
+            <div>
+                {{ form.new_password(placeholder="New password", class_="form-input") }}
+            </div>
+            <div>
+                {{ form.confirm(placeholder="Confirm new password", class_="form-input") }}
+            </div>
 
-        {{ form.new_password.label }}<br>
-        {{ form.new_password() }}<br><br>
-
-        {{ form.confirm.label }}<br>
-        {{ form.confirm() }}<br><br>
-
-        {{ form.submit }}
-    </form>
-</body>
-</html>
+            {{ form.submit(class_="btn btn-outline-success submit_btn") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
