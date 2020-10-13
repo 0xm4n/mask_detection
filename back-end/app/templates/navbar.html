@@ -32,15 +32,15 @@
             <li class="nav-item">
                 <a class="nav-link"
                    {% if active_page=='home' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                   href="{{ url_for('oauth.detection')}}"
+                   href="{{ url_for('detection.home')}}"
                 >
                     Home
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   {% if active_page=='home' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                   href="{{ url_for('oauth.detection')}}"
+                   {% if active_page=='history' %} style="color: rgba(0,0,0,.9)" {% endif %}
+                   href="{{ url_for('detection.upload_history')}}"
                 >
                     Upload History
                 </a>
@@ -48,7 +48,7 @@
             <li class="nav-item">
                 <a class="nav-link"
                    {% if active_page=='management' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                   href="{{ url_for('oauth.add_account')}}"
+                   href="{{ url_for('admin.add_account')}}"
                 >
                     Account Management
                 </a>
@@ -65,9 +65,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                Log out
-            </button>
+            <a href="{{ url_for('oauth.logout')}}" class="btn btn-outline-success my-2 my-sm-0">Log out</a>
         </form>
     </nav>
 

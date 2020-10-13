@@ -1,40 +1,7 @@
 {% extends 'base.html' %}
 
 {% block style %}
-<style>
-    body {
-        background-image: radial-gradient(closest-side at 50% 135%, #ffffff 50%, #eceff1 100%);
-    }
-
-    .reset-box {
-        width: 400px;
-        background: white;
-        padding: 40px 0 40px 0;
-        border-radius: 3px;
-        -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-        border: 1px solid #eeeeee;
-        margin: 0 auto;
-    }
-
-    .reset-container {
-        max-width: 340px;
-        margin: 0 auto;
-    }
-
-    .username_input {
-        width: 100%;
-        height: 34px;
-        padding: 18px 0.5rem;
-        font-size: 16px;
-        border-radius: 4px;
-        border: 1px solid #dddddd;
-    }
-
-    .search_btn {
-        margin-right: 12px;
-    }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recover.css') }}">
 {% endblock %}
 
 {% block content %}

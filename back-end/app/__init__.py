@@ -16,9 +16,9 @@ def create_app():
     db.init_app(app)
 
     # Register all blueprints
-    from .handlers import oauth
+    from .handlers import oauth, admin, detection
     app.register_blueprint(oauth.bp, url_prefix='/oauth')
-    # app.register_blueprint(session.bp, url_prefix='/session')
-    # app.register_blueprint(account.bp, url_prefix='/account')
+    app.register_blueprint(admin.bp, url_prefix='/admin')
+    app.register_blueprint(detection.bp, url_prefix='')
 
     return app

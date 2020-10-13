@@ -1,0 +1,93 @@
+{% extends 'navbar.html' %}
+
+{% set active_page = 'history' %}
+{% block style %}
+<style>
+    .container {
+        padding: 2rem 0rem;
+    }
+
+    h4 {
+        margin: 2rem 0rem 1rem;
+    }
+
+    .table-image td {
+        vertical-align: middle;
+    }
+
+    .table-image th {
+        vertical-align: middle;
+    }
+    h1 {
+        margin: 15px 0 5px 30px;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div>
+<!--    <h1 class="form-header">-->
+<!--        Dectect history-->
+<!--    </h1>-->
+<!--    <hr>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Upload Time</th>
+                        <th scope="col">Photo Name</th>
+                        <th scope="col">Number of Face</th>
+                        <th scope="col">Number of Mask</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td scope="row">10/13/2020 @ 4:19pm</td>
+                        <td>Template</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>
+                            <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                            <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i></button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">Delete</i></button>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td scope="row">10/13/2020 @ 4:19pm</td>
+                        <td>Template</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>
+                            <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                            <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i></button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">Delete</i></button>
+                        </td>
+                    </tr>
+                                        <tr>
+                        <td scope="row">10/13/2020 @ 4:19pm</td>
+                        <td>Template</td>
+                        <td>5</td>
+                        <td>2</td>
+                        <td>
+                            <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                            <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i></button>
+                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">Delete</i></button>
+                        </td>
+                    </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

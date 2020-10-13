@@ -71,16 +71,6 @@ def sign_up():
     return 'success'
 
 
-@bp.route('/management')
-def add_account():
-    return render_template('management.html')
-
-
-@bp.route('/detection')
-def detection():
-    return render_template('home.html')
-
-
 @bp.route('/setting')
 def setting():
     return render_template('setting.html')
