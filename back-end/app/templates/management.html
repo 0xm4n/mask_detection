@@ -33,42 +33,35 @@
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Add an
                         user
                     </button>
-                    <!--                    <button type="button" class="btn btn-info">Invite an user</button>-->
                 </div>
             </div>
             <table class="table table-striped">
                 <thead style="background-color: #eef7ff;">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
                 </tr>
                 </thead>
                 <tbody>
+                {% for user in users %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto@gmail.com</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    {% if user.role == 1 %}
                     <td>admin</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton@gmail.com</td>
+                    {% endif %}
+                    {% if user.role == 0 %}
                     <td>user</td>
+                    {% endif %}
                 </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>Bird@gmail.com</td>
-                    <td>user</td>
-                </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -81,32 +74,33 @@
                 </button>
             </div>
 
-            <form>
+            <form action="{{ url_for('admin.add_user')}}" method="POST">
                 <div class="modal-body">
+                    {{ form.hidden_tag() }}
                     <div class="form-group">
                         <label for="inputUsername">Username</label>
-                        <input type="text" class="form-control" id="inputUsername">
+                        {{ form.username(class_="form-control",id="inputUsername") }}
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="InputEmail">Email address</label>
+                        {{ form.email(class_="form-control",id="InputEmail") }}
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        <label for="InputPassword1">Password</label>
+                        {{ form.password(class_="form-control",id="InputPassword1") }}
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword2">Confirm password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword2">
+                        <label for="InputPassword2">Confirm password</label>
+                        {{ form.confirm(class_="form-control",id="InputPassword2") }}
                     </div>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Administrator permissions</label>
+                        {{ form.role(class_="form-check-input",id="Check1") }}
+                        <label class="form-check-label" for="Check1">Administrator permissions</label>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                    {{ form.submit(class_="btn btn-primary") }}
                 </div>
             </form>
         </div>

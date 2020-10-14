@@ -2,92 +2,122 @@
 
 {% set active_page = 'history' %}
 {% block style %}
-<style>
-    .container {
-        padding: 2rem 0rem;
-    }
-
-    h4 {
-        margin: 2rem 0rem 1rem;
-    }
-
-    .table-image td {
-        vertical-align: middle;
-    }
-
-    .table-image th {
-        vertical-align: middle;
-    }
-    h1 {
-        margin: 15px 0 5px 30px;
-    font-size: 24px;
-    font-weight: 300;
-    letter-spacing: -.5px;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
 {% endblock %}
 
 {% block content %}
 <div>
-<!--    <h1 class="form-header">-->
-<!--        Dectect history-->
-<!--    </h1>-->
-<!--    <hr>-->
+
+
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th scope="col">Upload Time</th>
-                        <th scope="col">Photo Name</th>
-                        <th scope="col">Number of Face</th>
-                        <th scope="col">Number of Mask</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item waves-effect waves-light">
+                <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab"
+                   aria-controls="all"
+                   aria-selected="false">ALL</a>
+            </li>
+            <li class="nav-item waves-effect waves-light">
+                <a class="nav-link" id="list1-tab" data-toggle="tab" href="#list1" role="tab"
+                   aria-controls="list1" aria-selected="false">With mask</a>
+            </li>
+            <li class="nav-item waves-effect waves-light">
+                <a class="nav-link" id="list2-tab" data-toggle="tab" href="#list2" role="tab"
+                   aria-controls="list2" aria-selected="false">Without mask</a>
+            </li>
+        </ul>
 
-                    <tr>
-                        <td scope="row">10/13/2020 @ 4:19pm</td>
-                        <td>Template</td>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>
-                            <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">Delete</i></button>
-                        </td>
-                    </tr>
-                                        <tr>
-                        <td scope="row">10/13/2020 @ 4:19pm</td>
-                        <td>Template</td>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>
-                            <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">Delete</i></button>
-                        </td>
-                    </tr>
-                                        <tr>
-                        <td scope="row">10/13/2020 @ 4:19pm</td>
-                        <td>Template</td>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>
-                            <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                            <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i></button>
-                            <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">Delete</i></button>
-                        </td>
-                    </tr>
+        <!-- Tab panes -->
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane active show" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Upload Time</th>
+                                <th scope="col">Photo Name</th>
+                                <th scope="col">Number of Face</th>
+                                <th scope="col">Number of Mask</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
+                            <tr>
+                                <td scope="row">10/13/2020 @ 4:19pm</td>
+                                <td>Template</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>
+                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">10/13/2020 @ 4:19pm</td>
+                                <td>Template</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>
+                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td scope="row">10/13/2020 @ 4:19pm</td>
+                                <td>Template</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>
+                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="list1" role="tabpanel" aria-labelledby="list1-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Upload Time</th>
+                                <th scope="col">Photo Name</th>
+                                <th scope="col">Number of Face</th>
+                                <th scope="col">Number of Mask</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-
-                    </tbody>
-                </table>
+                            <tr>
+                                <td scope="row">10/13/2020 @ 4:19pm</td>
+                                <td>Template</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>
+                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
+                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="list2" role="tabpanel" aria-labelledby="list2-tab">
+                333
             </div>
         </div>
+
+
     </div>
 </div>
 {% endblock %}

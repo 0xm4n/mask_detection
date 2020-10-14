@@ -11,10 +11,12 @@ bp = Blueprint('detection', __name__, template_folder='../templates')
 
 
 @bp.route('/home')
+@login_required
 def home():
     return render_template('home.html')
 
 
 @bp.route('/upload_history')
+@login_required
 def upload_history():
     return render_template('history.html')

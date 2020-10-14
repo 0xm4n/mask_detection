@@ -48,18 +48,16 @@
             <li class="nav-item">
                 <a class="nav-link"
                    {% if active_page=='management' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                   href="{{ url_for('admin.add_account')}}"
+                   href="{{ url_for('admin.add_user')}}"
                 >
                     Account Management
                 </a>
             </li>
             <li class="nav-item">
-                <a
-                        class="nav-link"
-                        {% if active_page=='setting' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                        href="{{ url_for('oauth.setting')}}"
+                <a class="nav-link"
+                   {% if active_page=='setting' %} style="color: rgba(0,0,0,.9)" {% endif %}
+                   href="{{ url_for('oauth.change_password')}}"
                 >
-
                     Settings
                 </a>
             </li>

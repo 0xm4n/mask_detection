@@ -23,27 +23,27 @@
         <div class="col-9">
             <h2>Change password</h2>
             <hr/>
-            <form>
+            <form  action="{{ url_for('oauth.change_password')}}" method="POST">
+                {{ form.hidden_tag() }}
                 <div class="form-group row">
                     <label for="inputPassword1" class="col-sm-3 col-form-label">Old password</label>
                     <div class="form-group mb-2">
-                        <input type="password" class="form-control" id="inputPassword1" placeholder="Old Password">
+                       {{ form.old_password(class_="form-control",id="inputPassword1",placeholder="Old Password") }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword2" class="col-sm-3 col-form-label">New password</label>
                     <div class="form-group  mb-2">
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="New Password">
+                        {{ form.new_password(class_="form-control",id="inputPassword2",placeholder="New Password") }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-3 col-form-label">Confirm</label>
                     <div class="form-group mb-2">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Confirm Password">
+                        {{ form.confirm(class_="form-control",id="inputPassword3",placeholder="Confirm Password") }}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-secondary">Update password</button>
-
+                {{ form.submit(class_="btn btn-outline-secondary") }}
             </form>
 
         </div>
