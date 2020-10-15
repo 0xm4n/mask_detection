@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash
 
 from .forms.register import RegisterForm
-from ..models import db
+from app import db
 from ..models.user import User
 from sqlalchemy.sql import exists
 
@@ -32,7 +32,7 @@ def add_user():
             if is_exist:
                 print(is_exist)
                 flash(u'That username is taken. Try another.')
-            elif form.new_password.data != form.confirm.data:
+            elif form.password.data != form.confirm.data:
                 flash(u'Passwords must match')
             else:
                 user = User(str(uuid4()), username, email, password, role, 1)

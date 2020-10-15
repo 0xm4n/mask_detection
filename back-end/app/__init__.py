@@ -1,5 +1,8 @@
 from flask import Flask
-from flask_mail import Mail
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
 
 def create_app():
     # Init Flask application object
@@ -15,9 +18,9 @@ def create_app():
     mail.init_app(app)
 
     # Init flask-sqlalchemy
-    from app.models import db
     db.app = app
     db.init_app(app)
+    db.create_all()
 
     # Register all blueprints
     from .handlers import oauth, admin, detection

@@ -1,6 +1,7 @@
 import datetime
-from . import db
+
 from flask import current_app
+from app import db
 
 from sqlalchemy import Column
 from sqlalchemy import SmallInteger, Integer, String
@@ -11,13 +12,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from time import time
 import jwt
 
+
 class User(db.Model):
     __tablename__ = 'md_user'
-
     ROLE_ADMIN = 1
     ROLE_USER = 0
 
-    id = Column(Integer, primary_key=True)
+    id = Column(String(255), primary_key=True)
     username = Column(String(255), unique=True, nullable=False)
     email = Column(String(255), unique=True)
     password = Column(db.String(255))
