@@ -2,8 +2,10 @@
 {% set active_page = "setting" %}
 {% block content %}
 <div style="margin-top: 30px"></div>
+
 <div class="container">
     <div class="row">
+
         <div class="col-3">
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Settings</a>
@@ -23,12 +25,12 @@
         <div class="col-9">
             <h2>Change password</h2>
             <hr/>
-            <form  action="{{ url_for('oauth.change_password')}}" method="POST">
+            <form action="{{ url_for('oauth.change_password')}}" method="POST">
                 {{ form.hidden_tag() }}
                 <div class="form-group row">
                     <label for="inputPassword1" class="col-sm-3 col-form-label">Old password</label>
                     <div class="form-group mb-2">
-                       {{ form.old_password(class_="form-control",id="inputPassword1",placeholder="Old Password") }}
+                        {{ form.old_password(class_="form-control",id="inputPassword1",placeholder="Old Password") }}
                     </div>
                 </div>
                 <div class="form-group row">
@@ -43,7 +45,17 @@
                         {{ form.confirm(class_="form-control",id="inputPassword3",placeholder="Confirm Password") }}
                     </div>
                 </div>
+
                 {{ form.submit(class_="btn btn-outline-secondary") }}
+                <div style="height:28px;margin-top:2px;font-size:14px;">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div style="color: #c62928;max-width: 240px;line-height: 1;text-align: left">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
             </form>
 
         </div>

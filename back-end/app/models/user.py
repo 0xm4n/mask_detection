@@ -1,12 +1,15 @@
 import datetime
 from . import db
+from flask import current_app
 
 from sqlalchemy import Column
 from sqlalchemy import SmallInteger, Integer, String
 from sqlalchemy import DateTime
 
-from werkzeug.security import check_password_hash, generate_password_hash
 
+from werkzeug.security import check_password_hash, generate_password_hash
+from time import time
+import jwt
 
 class User(db.Model):
     __tablename__ = 'md_user'
@@ -38,6 +41,20 @@ class User(db.Model):
 
     def update_password(self, new_password):
         self.password = generate_password_hash(new_password)
+
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            current_app.config['SECRET_KEY'], algorithm='HS256'
+        ).decode('utf-8')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, current_app.config['SECRET_KEY'], algorithm=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
 
     def is_authenticated(self):
         return True

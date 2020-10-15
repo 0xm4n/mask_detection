@@ -4,9 +4,19 @@
 
 {% block content %}
 
-<div style="margin-top: 30px"></div>
+<div style="height: 10px;">
+</div>
 
 <div class="container">
+    <div style="height: 30px;font-size:16px;">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div style="color: #c62928;max-width: 300px;line-height: 1;text-align: left">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     <div class="row">
         <div class="col-3">
             <div class="list-group">

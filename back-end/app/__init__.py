@@ -1,5 +1,5 @@
 from flask import Flask
-
+from flask_mail import Mail
 
 def create_app():
     # Init Flask application object
@@ -9,6 +9,10 @@ def create_app():
     # Init flask-login
     from .utils.login import login_manager
     login_manager.init_app(app)
+
+    # Init flask-mail
+    from .utils.mail import mail
+    mail.init_app(app)
 
     # Init flask-sqlalchemy
     from app.models import db

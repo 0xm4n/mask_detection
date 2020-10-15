@@ -14,6 +14,22 @@ class SearchAccountForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
+    new_password = PasswordField(
+        'New Password',
+        validators=[
+            DataRequired()
+        ]
+    )
+    confirm = PasswordField(
+        'Confirm New Password',
+        validators=[
+            DataRequired()
+        ]
+    )
+    submit = SubmitField('Change password')
+
+
+class ChangePasswordForm(FlaskForm):
     old_password = PasswordField(
         'Old Password',
         validators=[

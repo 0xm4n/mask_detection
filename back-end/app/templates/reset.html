@@ -10,12 +10,8 @@
     <div class="reset-container" style="text-align: left">
         <h1>Password reset for @{{name}}</h1>
         <hr>
-        <form action="{{ url_for('oauth.reset_password', name=name)}}" method="POST">
+        <form action="{{ url_for('oauth.reset_password', token=token)}}" method="POST">
             {{ form.hidden_tag() }}
-            <div>
-                {{ form.old_password(placeholder="Old password", class_="form-input") }}
-
-            </div>
 
             {% with messages = get_flashed_messages() %}
             {% if messages %}

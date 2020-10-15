@@ -18,15 +18,15 @@
             <br>
             <br>
             {{ form.password(placeholder="Password", class_="form-input") }}
-            <br>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            {% for message in messages %}
-            <span style="color: #c62928">{{ message }}</span>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-            <br>
+            <div style="height:28px;margin-bottom:2px;font-size:14px;">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div style="color: #c62928;max-width: 240px;line-height: 1;text-align: left">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
             {{ form.submit(class_="submit_btn") }}
         </form>
         <div class="action-reset">
