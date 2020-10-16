@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from flask import Blueprint, render_template
-from flask import flash, redirect, url_for
+from flask import flash, redirect, url_for, request
 from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash
 
@@ -20,9 +20,15 @@ def add_user():
     if current_user.role == 0:
         flash("you don't have permission to access this page.")
         return redirect(url_for('oauth.login'))
-    else:
-        form = RegisterForm()
-        users = User.query.with_entities(User.username, User.email, User.role)
+
+    form = RegisterForm()
+
+    users = User.query.with_entities(User.username, User.email, User.role)
+
+    if request.method == 'GET':
+        return render_template('management.html', form=form, users=users)
+
+    elif request.method == 'POST':
         if form.validate_on_submit():
             username = form.username.data
             email = form.email.data
@@ -42,4 +48,9 @@ def add_user():
     return render_template('management.html', form=form, users=users)
 
 
-
+@bp.route('/delete_user/<name>', methods=['GET', 'POST'])
+@login_required
+def delete_user(name):
+    User.query.filter_by(username=name).delete()
+    db.session.commit()
+    return redirect(url_for('admin.add_user'))

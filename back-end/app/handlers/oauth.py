@@ -43,6 +43,9 @@ def forget_password():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None:
             flash(u'No search result, please try again with other username.', category='error')
+        elif user.email is '':
+            flash(u"This account didn't specified an email. Recover pwd is only for the account setting up by admin "
+                  u"which has a specified email ( not for account set up via register API)", category='error')
         else:
             token = user.get_reset_password_token()
             print(user.email)
