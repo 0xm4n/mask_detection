@@ -8,7 +8,6 @@
 {% block content %}
 <div>
 
-
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item waves-effect waves-light">
@@ -18,11 +17,19 @@
             </li>
             <li class="nav-item waves-effect waves-light">
                 <a class="nav-link" id="list1-tab" data-toggle="tab" href="#list1" role="tab"
-                   aria-controls="list1" aria-selected="false">With mask</a>
+                   aria-controls="list1" aria-selected="false">All with masks</a>
             </li>
             <li class="nav-item waves-effect waves-light">
                 <a class="nav-link" id="list2-tab" data-toggle="tab" href="#list2" role="tab"
-                   aria-controls="list2" aria-selected="false">Without mask</a>
+                   aria-controls="list2" aria-selected="false">Some with masks</a>
+            </li>
+            <li class="nav-item waves-effect waves-light">
+                <a class="nav-link" id="list3-tab" data-toggle="tab" href="#list3" role="tab"
+                   aria-controls="list3" aria-selected="false">None with masks</a>
+            </li>
+            <li class="nav-item waves-effect waves-light">
+                <a class="nav-link" id="list4-tab" data-toggle="tab" href="#list4" role="tab"
+                   aria-controls="list4" aria-selected="false">No faces detected</a>
             </li>
         </ul>
 
@@ -35,47 +42,26 @@
                             <thead>
                             <tr>
                                 <th scope="col">Upload Time</th>
-                                <th scope="col">Photo Name</th>
-                                <th scope="col">Number of Face</th>
-                                <th scope="col">Number of Mask</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">Number of Faces</th>
+                                <th scope="col">Number of Masks</th>
+                                <th scope="col">Uploads</th>
+                                <th scope="col">Results</th>
                             </tr>
                             </thead>
                             <tbody>
-
+                            {% for photo in all_photos %}
                             <tr>
-                                <td scope="row">10/13/2020 @ 4:19pm</td>
-                                <td>Template</td>
-                                <td>5</td>
-                                <td>2</td>
+                                <td ><p>{{ photo.create_at }}</p></td>
+                                <td>{{ photo.nfaces }}</td>
+                                <td>{{ photo.nmasks }}</td>
                                 <td>
-                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
-                                    </button>
+                                    <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.photo_name]) ) }}" />
+                                </td>
+                                <td>
+                                    <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}" />
                                 </td>
                             </tr>
-                            <tr>
-                                <td scope="row">10/13/2020 @ 4:19pm</td>
-                                <td>Template</td>
-                                <td>5</td>
-                                <td>2</td>
-                                <td>
-                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">10/13/2020 @ 4:19pm</td>
-                                <td>Template</td>
-                                <td>5</td>
-                                <td>2</td>
-                                <td>
-                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
-                                    </button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -88,35 +74,136 @@
                             <thead>
                             <tr>
                                 <th scope="col">Upload Time</th>
-                                <th scope="col">Photo Name</th>
-                                <th scope="col">Number of Face</th>
-                                <th scope="col">Number of Mask</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">Number of Faces</th>
+                                <th scope="col">Number of Masks</th>
+                                <th scope="col">Uploads</th>
+                                <th scope="col">Results</th>
                             </tr>
                             </thead>
                             <tbody>
-
-                            <tr>
-                                <td scope="row">10/13/2020 @ 4:19pm</td>
-                                <td>Template</td>
-                                <td>5</td>
-                                <td>2</td>
-                                <td>
-                                    <button type="button" class="btn btn-info"><i class="far fa-eye">Origin</i></button>
-                                    <button type="button" class="btn btn-success"><i class="fas fa-edit">Result</i>
-                                    </button>
-                                </td>
-                            </tr>
+                                {% for photo in all_photos %}
+                                    {% if photo.photo_type == 1 %}
+                                        <tr>
+                                            <td ><p>{{ photo.create_at }}</p></td>
+                                            <td>{{ photo.nfaces }}</td>
+                                            <td>{{ photo.nmasks }}</td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.photo_name]) ) }}" />
+                                            </td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}" />
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="tab-pane" id="list2" role="tabpanel" aria-labelledby="list2-tab">
-                333
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Upload Time</th>
+                                <th scope="col">Number of Faces</th>
+                                <th scope="col">Number of Masks</th>
+                                <th scope="col">Uploads</th>
+                                <th scope="col">Results</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for photo in all_photos %}
+                                    {% if photo.photo_type == 2 %}
+                                        <tr>
+                                            <td ><p>{{ photo.create_at }}</p></td>
+                                            <td>{{ photo.nfaces }}</td>
+                                            <td>{{ photo.nmasks }}</td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.photo_name]) ) }}" />
+                                            </td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}" />
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="list3" role="tabpanel" aria-labelledby="list3-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Upload Time</th>
+                                <th scope="col">Number of Faces</th>
+                                <th scope="col">Number of Masks</th>
+                                <th scope="col">Uploads</th>
+                                <th scope="col">Results</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for photo in all_photos %}
+                                    {% if photo.photo_type == 0 %}
+                                        <tr>
+                                            <td ><p>{{ photo.create_at }}</p></td>
+                                            <td>{{ photo.nfaces }}</td>
+                                            <td>{{ photo.nmasks }}</td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.photo_name]) ) }}" />
+                                            </td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}" />
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="list4" role="tabpanel" aria-labelledby="list4-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Upload Time</th>
+                                <th scope="col">Number of Faces</th>
+                                <th scope="col">Number of Masks</th>
+                                <th scope="col">Uploads</th>
+                                <th scope="col">Results</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for photo in all_photos %}
+                                    {% if photo.photo_type == 3 %}
+                                        <tr>
+                                            <td ><p>{{ photo.create_at }}</p></td>
+                                            <td>{{ photo.nfaces }}</td>
+                                            <td>{{ photo.nmasks }}</td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.photo_name]) ) }}" />
+                                            </td>
+                                            <td>
+                                                <img src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}" />
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-
 
     </div>
 </div>

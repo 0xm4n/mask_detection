@@ -8,6 +8,7 @@
 
 
 {% block content %}
+
 <div class="h-75 d-flex justify-content-center align-items-center">
     <div>
         <h1 style="text-align: center; font-family: Comic Sans MS, cursive, sans-serif">Mask Detection</h1>
@@ -34,27 +35,44 @@
                 <!-- Tab panes -->
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane active show" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form>
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp">
+                        <form action="{{url_for('detection.detection_url')}}" method='POST' enctype="multipart/form-data">
+                            
+                            <div class="form-group" >
+                                {{ form1.hidden_tag() }}
+                                {{ form1.photo }}
+                                <!-- <input type="email" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp"> -->
                             </div>
-                            <button type="submit" class="btn btn-outline-dark">Detect by image</button>
+                            {{ form1.submit( class="btn btn-primary") }}
+                            <!-- <button type="submit" class="btn btn-outline-dark">Detect by image</button> -->
                         </form>
                     </div>
                     <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <form>
+                        <form action="{{url_for('detection.detection_local')}}" method='POST' enctype="multipart/form-data">
                             <div class="form-group">
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                {{ form2.hidden_tag() }}
+                                {{ form2.photo }}
+                                <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
                             </div>
-                            <button type="submit" class="btn btn-outline-dark">Detect by image</button>
+                            {{ form2.submit( class="btn btn-primary") }}
+                            <!-- <button type="submit" class="btn btn-outline-dark">Detect by image</button> -->
                         </form>
                     </div>
                 </div>
 
             </div>
         </div>
-
+        
+        <br>
+        <div style="height: 30px;font-size:16px;">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div style="color: #c62928;max-width: 300px;line-height: 1;text-align: left">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
 
     </div>
 </div>

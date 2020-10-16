@@ -6,6 +6,7 @@ from app import db
 from sqlalchemy import Column
 from sqlalchemy import SmallInteger, Integer, String
 from sqlalchemy import DateTime
+from sqlalchemy import ForeignKey
 
 
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -26,6 +27,8 @@ class User(db.Model):
     role = Column(SmallInteger, default=0)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     status = db.Column(db.Integer, nullable=False, default=1)
+
+    photos = db.relationship('Photo', backref='User', lazy='dynamic')
 
     def __init__(self, id, username, email, password, role, status):
         self.id = id
@@ -71,3 +74,24 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+
+class Photo(db.Model):
+    __tablename__='photos'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    photo_name = Column(String(512), unique=True)
+    output_name = Column(String(512), unique=True)
+    nfaces = Column(Integer)
+    nmasks = Column(Integer)
+    
+    # flag == 3 no faces
+    # flag == 2 some with and some without masks
+    # flag == 1 all with masks
+    # flag == 0 all without masks
+    photo_type = Column(Integer)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    user_id = Column(String(255), ForeignKey('md_user.id'))
+
+    def __repr__(self):
+        return "<Photo %r>" % self.id
+

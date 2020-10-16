@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 
@@ -26,6 +27,6 @@ def create_app():
     from .handlers import oauth, admin, detection
     app.register_blueprint(oauth.bp, url_prefix='/oauth')
     app.register_blueprint(admin.bp, url_prefix='/admin')
-    app.register_blueprint(detection.bp, url_prefix='')
+    app.register_blueprint(detection.bp, url_prefix='/detection')
 
     return app
