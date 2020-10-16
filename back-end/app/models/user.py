@@ -21,7 +21,7 @@ class User(db.Model):
 
     id = Column(String(255), primary_key=True)
     username = Column(String(255), unique=True, nullable=False)
-    email = Column(String(255), unique=True)
+    email = Column(String(255))
     password = Column(db.String(255))
 
     role = Column(SmallInteger, default=0)
