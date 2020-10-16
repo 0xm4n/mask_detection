@@ -28,7 +28,7 @@ bp = Blueprint('detection', __name__, template_folder='../templates')
 
 
 @bp.route('/home')
-# @login_required
+@login_required
 def home():
     form1 = UploadFromURL()
     form2 = UploadFromLocal()
@@ -36,7 +36,7 @@ def home():
 
     
 @bp.route('/upload_history/')
-# @login_required
+@login_required
 def upload_history():
 
     all_photos = Photo.query.filter(Photo.user_id == current_user.id).all()
@@ -45,7 +45,7 @@ def upload_history():
 
 
 @bp.route('/detection_url', methods=['POST', 'GET'])
-# @login_required
+@login_required
 def detection_url():
     form1 = UploadFromURL()
     form2 = UploadFromLocal()
@@ -107,7 +107,7 @@ def detection_url():
 
 
 @bp.route('/home', methods=['POST', 'GET'])
-# @login_required
+@login_required
 def detection_local():
     form1 = UploadFromURL()
     form2 = UploadFromLocal()
@@ -138,9 +138,6 @@ def detection_local():
             # for windows
             photo_save_path = photo_save_path.replace('\\', '/')
             output_save_path = output_save_path.replace('\\', '/')
-
-            # photo_gallery_path = photo_gallery_path.replace('\\', '/')
-            # output_gallery_path = output_gallery_path.replace('\\', '/')
 
             input_img = Image.fromarray(photo_ori)
             output_img = Image.fromarray(photo_out)

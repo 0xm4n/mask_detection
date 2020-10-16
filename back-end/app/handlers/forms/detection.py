@@ -5,7 +5,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 import os
 
-from ...settings import ALLOWED_EXTENSIONS # ???
+from ...settings import ALLOWED_EXTENSIONS 
 
 
 class UploadFromLocal(FlaskForm):
@@ -13,7 +13,7 @@ class UploadFromLocal(FlaskForm):
         'Photo', 
         validators=[
             FileRequired(), 
-            FileAllowed(ALLOWED_EXTENSIONS, 'Images only!')
+            FileAllowed(ALLOWED_EXTENSIONS)
         ]
     )
     submit = SubmitField('Upload')
