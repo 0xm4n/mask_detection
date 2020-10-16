@@ -48,8 +48,6 @@ def forget_password():
                   u"which has a specified email ( not for account set up via register API)", category='error')
         else:
             token = user.get_reset_password_token()
-            print(user.email)
-            print(token)
             msg = Message("Reset Password",
                           sender="ece1779@hotmail.com",
                           recipients=[user.email])
