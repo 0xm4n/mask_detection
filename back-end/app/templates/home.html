@@ -88,19 +88,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detect Result</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detection Result</h5>
                     <a href="{{ url_for('detection.home') }}" class="close">
                         <span aria-hidden="true">&times;</span>
                     </a>
                 </div>
-                <div class="modal-body" style="text-align:center;">
+                <div class="modal-body" style="text-align:center" >
 
 
 
                     {% if photo.photo_name != None %}
                         <img class="rounded img-thumbnail" src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}"/>
                     {% endif %}
-                    <div>Number of faces: {{ photo.nfaces }}</div>
+                    <div style="margin-top:11px">Number of faces: {{ photo.nfaces }}</div>
                     <div>Number of masks: {{ photo.nmasks }}</div>
                 </div>
                 <div class="modal-footer">
