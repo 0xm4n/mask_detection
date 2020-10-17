@@ -100,8 +100,7 @@ def detection(frame, dt1, suffix):
 
 
 @bp.route('/upload_history/')
-# @login_required
+@login_required
 def upload_history():
     all_photos = Photo.query.filter(Photo.user_id == current_user.id).all()
-
     return render_template('history.html', all_photos=all_photos)

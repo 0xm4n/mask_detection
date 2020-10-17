@@ -32,8 +32,8 @@ h1 {
     border: 1px solid #ccc;
     border-bottom: 0;
     color: #222;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 300;
     padding: 7px;
 }
 
@@ -48,10 +48,3 @@ h1 {
 }
 
 /* Tab Content */
-.tab-pane {
-    background: #F5F5F5;
-    box-shadow: 0 0 4px rgba(0, 0, 0, .4);
-    border-radius: 0;
-    text-align: center;
-    padding: 10px;
-}

@@ -3,9 +3,6 @@ from datetime import datetime
 import os
 from urllib.parse import urlparse
 import cv2
-import cvlib as cv
-from cvlib.object_detection import draw_bbox
-import matplotlib.pyplot as plt
 import numpy as np
 import binascii
 from PIL import Image

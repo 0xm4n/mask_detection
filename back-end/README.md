@@ -64,13 +64,23 @@ Visit: http://localhost:5000
 ├── README.md
 ├── requirements.txt
 └── run.py
-
 ```
+```
+app/controllers     Controller handles the user request.
+app/models          Model class represents the shape of the data. 
+app/templates       Templates display model data and provide a user interface. 
+app/static          Static resource files like css, img.
+app/utils           Third-party libraries like flask-login, flask-mail used as util.
+app/__init__.py     Create_app().
+app/settings.py     Configuration file 
+```
+
 ## Contact
 - Bugs and feature request can be submitted here on [GitHub](https://github.com/zhenyit/mask_detection/issues).
 - Patches should be submitted using the [Pull Request](https://github.com/zhenyit/mask_detection/pulls) system of GitHub.
-- [Zhenyi Tang] zhenyi.tang@mail.utoronto.ca
-- [Ran He] abby.he@mail.utoronto.ca
+- [Zhenyi Tang]  zhenyi.tang@mail.utoronto.ca
+- [Ran He]       abby.he@mail.utoronto.ca
+- [Macious Peng] macious.peng@mail.utoronto.ca
 
 ## License
 MIT License
