@@ -6,8 +6,6 @@ from app import db
 from sqlalchemy import Column
 from sqlalchemy import SmallInteger, Integer, String
 from sqlalchemy import DateTime
-from sqlalchemy import ForeignKey
-
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from time import time
