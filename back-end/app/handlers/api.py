@@ -1,13 +1,10 @@
 from uuid import uuid4
 from datetime import datetime
 import os
-from urllib.parse import urlparse
 import cv2
 import numpy as np
-import binascii
 from PIL import Image
-import requests as req
-from io import BytesIO
+
 
 from flask import Blueprint, render_template
 from flask import flash, redirect, url_for, request
@@ -16,7 +13,8 @@ from flask_login import login_required, logout_user, login_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import db
-from ..models.user import User, Photo
+from ..models.user import User
+from ..models.photo import Photo
 from sqlalchemy.sql import exists
 from .forms.api_form import RegisterForm, UploadForm
 

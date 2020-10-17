@@ -12,13 +12,19 @@ from flask import request, flash, redirect, url_for
 from flask_login import login_required, logout_user, login_user, current_user
 
 from app import db
-from ..models.user import User, Photo
+from ..models.photo import Photo
+
 from .forms.detection import UploadFromLocal, UploadFromURL
 
 from ..settings import UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 from ..utils.FaceMaskDetection.run_detection import start
 
 bp = Blueprint('detection', __name__, template_folder='../templates')
+
+
+@bp.route('/', methods=['GET', 'POST'])
+def root():
+    return redirect(url_for('oauth.login'))
 
 
 @bp.route('/home', methods=['GET', 'POST'])

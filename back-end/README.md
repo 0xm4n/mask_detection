@@ -103,3 +103,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+##API
+
+| Method        | URL           | Cool  |
+| ------------- |:-------------:| -----:|
+| GET     | right-aligned | $1600 |
+| GET      | centered      |   $12 |
+| GET | are neat      |    $1 |
