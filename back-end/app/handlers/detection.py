@@ -38,16 +38,25 @@ def detection_url():
     url_form = UploadFromURL()
     file_form = UploadFromLocal()
     time = datetime.utcnow().strftime("%Y%m%d%H%M%S%f")
+    
     if url_form.validate_on_submit():
-        url = url_form.photo.data
-        suffix = os.path.splitext(urlparse(url).path)[-1]
-        img = req.get(url)
-        frame = Image.open(BytesIO(img.content))
-        frame = np.array(frame)
-        b, g, r = cv2.split(frame)
-        frame = cv2.merge([r, g, b])
-        result_photo = detection(frame, time, suffix)
-        return render_template('home.html', form1=url_form, form2=file_form, photo=result_photo)
+        try:
+            url = url_form.photo.data
+            suffix = os.path.splitext(urlparse(url).path)[-1]
+
+            img = req.get(url)
+            frame = Image.open(BytesIO(img.content))
+            frame = np.array(frame)
+            b, g, r = cv2.split(frame)
+            frame = cv2.merge([r, g, b])
+            
+            result_photo = detection(frame, time, suffix)
+            return render_template('home.html', form1=url_form, form2=file_form, photo=result_photo)
+        except:  
+            flash(u'The URL doesn\'t refer to an image, or the image is not publicly accessible.')
+    else:  
+        flash(u'The URL doesn\'t refer to an image, or the image is not publicly accessible.')
+
     return redirect(url_for('detection.home'))
 
 
@@ -57,13 +66,21 @@ def detection_file():
     url_form = UploadFromURL()
     file_form = UploadFromLocal()
     time = datetime.utcnow().strftime("%Y%m%d%H%M%S%f")
+
     if file_form.validate_on_submit():
-        file = file_form.photo.data
-        suffix = os.path.splitext(file.filename)[-1]
-        img = file.read()
-        frame = cv2.imdecode(np.fromstring(img, np.uint8), cv2.IMREAD_COLOR)
-        result_photo = detection(frame, time, suffix)
-        return render_template('home.html', form1=url_form, form2=file_form, photo=result_photo)
+        try:
+            file = file_form.photo.data
+            suffix = os.path.splitext(file.filename)[-1]
+            img = file.read()
+            frame = cv2.imdecode(np.fromstring(img, np.uint8), cv2.IMREAD_COLOR)
+            
+            result_photo = detection(frame, time, suffix)
+            return render_template('home.html', form1=url_form, form2=file_form, photo=result_photo)
+        except:
+            flash(u'The image must be in one of the following formats: .jpg, .jpeg, .png, .bmp.')        
+    else:
+        flash(u'The image must be in one of the following formats: .jpg, .jpeg, .png, .bmp.')
+        
     return redirect(url_for('detection.home'))
 
 
