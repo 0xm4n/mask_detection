@@ -16,6 +16,7 @@
             height: 100%;
         }
     </style>
+
     {% block style %}
     {% endblock %}
 </head>
@@ -37,41 +38,41 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link"
-                       {% if active_page=='home' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                       href="{{ url_for('detection.home')}}"
+                            {% if active_page=='home' %} style="color: rgba(0,0,0,.9)" {% endif %}
+                       href="{{ url_for('detection.home') }}"
                     >
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       {% if active_page=='history' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                       href="{{ url_for('detection.upload_history')}}"
+                            {% if active_page=='history' %} style="color: rgba(0,0,0,.9)" {% endif %}
+                       href="{{ url_for('detection.upload_history') }}"
                     >
                         Upload History
                     </a>
                 </li>
                 {% if current_user.role == 1 %}
-                <li class="nav-item">
-                    <a class="nav-link"
-                       {% if active_page=='management' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                       href="{{ url_for('admin.add_user')}}"
-                    >
-                        Account Management
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                                {% if active_page=='management' %} style="color: rgba(0,0,0,.9)" {% endif %}
+                           href="{{ url_for('admin.add_user') }}"
+                        >
+                            Account Management
+                        </a>
+                    </li>
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link"
-                       {% if active_page=='setting' %} style="color: rgba(0,0,0,.9)" {% endif %}
-                       href="{{ url_for('oauth.change_password')}}"
+                            {% if active_page=='setting' %} style="color: rgba(0,0,0,.9)" {% endif %}
+                       href="{{ url_for('oauth.change_password') }}"
                     >
                         Settings
                     </a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <a href="{{ url_for('oauth.logout')}}" class="btn btn-outline-success my-2 my-sm-0">Log out</a>
+                <a href="{{ url_for('oauth.logout') }}" class="btn btn-outline-success my-2 my-sm-0">Log out</a>
             </form>
         </div>
 
@@ -98,5 +99,6 @@
         $("#{{request.endpoint}}").parent().addClass("active");
     })
 </script>
+{%- block script %}{%- endblock %}
 </body>
 </html>

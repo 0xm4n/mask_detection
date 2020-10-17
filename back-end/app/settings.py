@@ -16,22 +16,9 @@ SQLALCHEMY_TRACK_MODIFICATIONS = True
 MAIL_SERVER = 'smtp.live.com'
 MAIL_PORT = 587
 MAIL_USE_TLS = True
-MAIL_USERNAME = 'ece1779@hotmail.com'
-MAIL_PASSWORD = '2Pk\Ce$e[52SzSt5'
+MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
 ADMINS = ['ece1779@hotmail.com']
-
-
-# MySQL Database Config
-# DIALECT = 'mysql'
-# DRIVER = 'pymysql'
-# MYSQL_USER = 'root'
-# MYSQL_PASSWORD = 'password'
-# MYSQL_HOST = 'localhost'
-# MYSQL_PORT = '3306'
-# DATABASE = 'mask'
-# SQLALCHEMY_DATABASE_URI = '{}+{}://{}:{}@{}:{}/{}?charset=utf8'.format(
-#     DIALECT, DRIVER, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT, DATABASE
-# )
 
 
 PERMANTENT_SESSION_LIFETIME = timedelta(hours=24)

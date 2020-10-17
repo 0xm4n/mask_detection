@@ -27,11 +27,7 @@ def create_app():
     from .handlers import oauth, admin, detection, api
     app.register_blueprint(oauth.bp, url_prefix='/oauth')
     app.register_blueprint(admin.bp, url_prefix='/admin')
-<<<<<<< HEAD
-    app.register_blueprint(detection.bp, url_prefix='/detection')
-=======
     app.register_blueprint(detection.bp, url_prefix='')
     app.register_blueprint(api.bp, url_prefix='/api')
->>>>>>> 934d401e039331e9110335046f057f49da03aa91
 
     return app

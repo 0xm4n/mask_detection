@@ -3,78 +3,123 @@
 {% set active_page = 'home' %}
 
 {% block style %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script>
+        $(document).ready(function () {
+            $("#resultModal").modal('show');
+        });
+    </script>
 {% endblock %}
 
 
 {% block content %}
 
-<div class="h-75 d-flex justify-content-center align-items-center">
-    <div>
-        <h1 style="text-align: center; font-family: Comic Sans MS, cursive, sans-serif">Mask Detection</h1>
-        <div class="input-frame">
-            <div class="text-frame">
-                <div class="text-title">Detect by image</div>
-                <div>Mask detection with an image instead of text. Try dragging an image here.</div>
-            </div>
 
-            <div class="upload-frame">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-left: 16px">
-                    <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                           aria-controls="home"
-                           aria-selected="false">Paste Image URL</a>
-                    </li>
-                    <li class="nav-item waves-effect waves-light">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                           aria-controls="profile" aria-selected="false">Upload an image</a>
-                    </li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane active show" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form action="{{url_for('detection.detection_url')}}" method='POST' enctype="multipart/form-data">
-                            
-                            <div class="form-group" >
-                                {{ form1.hidden_tag() }}
-                                {{ form1.photo }}
-                                <!-- <input type="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp"> -->
-                            </div>
-                            {{ form1.submit( class="btn btn-primary") }}
-                            <!-- <button type="submit" class="btn btn-outline-dark">Detect by image</button> -->
-                        </form>
-                    </div>
-                    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <form action="{{url_for('detection.detection_local')}}" method='POST' enctype="multipart/form-data">
-                            <div class="form-group">
-                                {{ form2.hidden_tag() }}
-                                {{ form2.photo }}
-                                <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
-                            </div>
-                            {{ form2.submit( class="btn btn-primary") }}
-                            <!-- <button type="submit" class="btn btn-outline-dark">Detect by image</button> -->
-                        </form>
-                    </div>
+    <div class="h-75 d-flex justify-content-center align-items-center">
+        <div>
+            <h1 style="text-align: center; font-family: Comic Sans MS, cursive, sans-serif">Mask Detection</h1>
+            <div class="input-frame">
+                <div class="text-frame">
+                    <div class="text-title">Detect by image</div>
+                    <div>Mask detection with an image instead of text. Try dragging an image here.</div>
                 </div>
 
+                <div class="upload-frame">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-left: 16px">
+                        <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home"
+                               aria-selected="false">Paste Image URL</a>
+                        </li>
+                        <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Upload an image</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{{ url_for('detection.detection_url') }}" method='POST'
+                                  enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    {{ form1.hidden_tag() }}
+                                    {{ form1.photo(class="form-control",id="exampleInputEmail1",placeholder="Paste URL here") }}
+                                    <!-- <input type="email"
+                                           aria-describedby="emailHelp"> -->
+                                </div>
+                                {{ form1.submit( class="btn btn-outline-dark", style="width:120px") }}
+                                <!-- <button type="submit" class="btn btn-outline-dark">Detect by image</button> -->
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="{{ url_for('detection.detection_file') }}" method='POST'
+                                  enctype="multipart/form-data">
+                                <div class="form-group">
+                                    {{ form2.hidden_tag() }}
+                                    {{ form2.photo }}
+                                </div>
+                                {{ form2.submit( class="btn btn-outline-dark", style="width:120px") }}
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <br>
+            <div style="height: 30px;font-size:16px;">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div style="color: #c62928;max-width: 300px;line-height: 1;text-align: left">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal" data-backdrop="static" id="resultModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detect Result</h5>
+                    <a href="{{ url_for('detection.home') }}" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+
+
+
+                    {% if photo.photo_name != None %}
+                        <img class="rounded img-thumbnail" src="{{ url_for('static', filename='/'.join(['uploads', photo.user_id, photo.output_name]) ) }}"/>
+                    {% endif %}
+                    <div>Number of faces: {{ photo.nfaces }}</div>
+                    <div>Number of masks: {{ photo.nmasks }}</div>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ url_for('detection.home') }}" class="btn btn-secondary">Close</a>
+                </div>
             </div>
         </div>
-        
-        <br>
-        <div style="height: 30px;font-size:16px;">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            {% for message in messages %}
-            <div style="color: #c62928;max-width: 300px;line-height: 1;text-align: left">{{ message }}</div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-        </div>
-
     </div>
-</div>
+
 
 {% endblock %}
+
+
+{%- block script %}
+    {% if photo.photo_name != None %}
+        <script>
+            $(document).ready(function () {
+                $('#resultModal').modal('show')
+            })
+        </script>
+    {% endif %}
+{%- endblock %}

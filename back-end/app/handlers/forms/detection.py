@@ -12,7 +12,6 @@ class UploadFromLocal(FlaskForm):
     photo = FileField(
         'Photo', 
         validators=[
-            FileRequired(), 
             FileAllowed(ALLOWED_EXTENSIONS, 'Images only!')
         ]
     )
@@ -23,7 +22,6 @@ class UploadFromURL(FlaskForm):
     photo = StringField(
         'Photo', 
         validators=[
-            DataRequired(), 
             URL()
         ]
     )
