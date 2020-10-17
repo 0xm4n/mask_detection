@@ -5,14 +5,15 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 import os
 
-from ...settings import ALLOWED_EXTENSIONS # ???
+from ...settings import ALLOWED_EXTENSIONS
 
 
 class UploadFromLocal(FlaskForm):
     photo = FileField(
-        'Photo', 
+        'Photo',
         validators=[
-            FileAllowed(ALLOWED_EXTENSIONS, 'Images only!')
+            FileRequired(),
+            FileAllowed(ALLOWED_EXTENSIONS)
         ]
     )
     submit = SubmitField('Upload')
@@ -20,11 +21,9 @@ class UploadFromLocal(FlaskForm):
 
 class UploadFromURL(FlaskForm):
     photo = StringField(
-        'Photo', 
+        'Photo',
         validators=[
             URL()
         ]
     )
     submit = SubmitField('Upload')
-
-
