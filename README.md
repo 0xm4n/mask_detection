@@ -9,7 +9,7 @@ whether individuals that show up in a picture are wearing a face mask.
 - Password recovery. User can reset his/her password with his/her email address.
 - User management. The administrator is able to create additional user accounts.
 - Permission control. User accounts have access to all features except create/delete user accounts.
-- Mask detections. Authenticated users are able to run mask detection on images uploaded from local file system or downloaded from a web URL.
+- Mask detections. Authenticated users are able to run mask detection on images uploaded from the local file system or downloaded from a web URL.
 - Upload history. Authenticated users are able to browse lists of 
 previously uploaded images and their corresponding detection 
 results.
@@ -221,6 +221,67 @@ User account can be delete by Admin(Admin account can not be deleted).
 | Field        | Type           | Description              |
 | -------------|----------------|--------------------------|
 | code         | Integer        | 200(success)             |
+
+---
+### Detection.detection_url()
+#### Description:
+Receive the URL pasted by users through the flask form. If the URL refers to an image with a reasonable file size and publicly accessible, download it and apply the face detection to that image. The corresponding detection results are saved to the database and showed to the user.
+
+#### Method: `POST`
+#### Path: `/detection/detection_url`
+#### Parameter
+| Field        | Type           | Description              |
+| -------------|----------------|--------------------------|
+| URL          | String         |The URL refers to a publicly accessible image |
+#### Success response
+| Field        | Type           | Description              |
+| -------------|----------------|--------------------------|
+| nfaces | Integer         |  # faces detected         |
+| nmasks | Integer         |  # masks detected         |
+| image           | Image         | A new version of the image with red rectangles drawn around the faces of people who are not wearing masks and green rectangles drawn on the faces of those that are. |
+| photo_type     | Integer    | 0: all with masks; 1: all with masks; 2: some with masks; 3: no faces detected  |
+
+#### Error response
+| Field            | Description                                     |
+| -----------------|-------------------------------------------------|
+| InvalidURL    | The URL doesn't refer to a publicly accessible image. |
+
+
+---
+### Detection.detection_file()
+#### Description:
+Receive the image selected from the local file system by users through the flask form. If the format of the file is correct and it has a reasonable file size, upload it and apply the face detection to that image. The corresponding detection results are saved to the database and showed to the user.
+
+#### Method: `POST`
+#### Path: `/detection/detection_file`
+#### Parameter
+| Field        | Type           | Description              |
+| -------------|----------------|--------------------------|
+| file          | File         |An image uploaded from the local file system. |
+#### Success response
+| Field        | Type           | Description              |
+| -------------|----------------|--------------------------|
+| nfaces | Integer         |  # faces detected         |
+| nmasks | Integer         |  # masks detected         |
+| image           | Image         | The Users-ID             |
+| photo_type     | Integer         | 0: all with masks; 1: all with masks; 2: some with masks; 3: no faces detected     |
+
+#### Error response
+| Field            | Description                                     |
+| -----------------|-------------------------------------------------|
+| InvalidFileType    | The image must be in one of the following formats: .jpg, .jpeg, .png, .bmp. |
+
+---
+### Detection.upload_history()
+#### Description:
+Query from the database and return all the successfully uploaded images and their corresponding detection results.
+#### Method: `GET`
+#### Path: `/detection/upload_history `
+#### Success response
+| Field        | Type           | Description              |
+| -------------|----------------|--------------------------|
+|all images | Image Object List         |  Image object contains the original uploaded image and all the detection results.     |
+
 
 
 ## Contact
