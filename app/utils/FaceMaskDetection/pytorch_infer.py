@@ -51,7 +51,7 @@ def inference(image,
     output_info = []
     height, width, _ = image.shape
     image_resized = cv2.resize(image, target_shape)
-    image_np = image_resized / 255.0  # 归一化到0~1
+    image_np = image_resized / 255.0  
     image_exp = np.expand_dims(image_np, axis=0)
 
     image_transposed = image_exp.transpose((0, 3, 1, 2))
@@ -76,7 +76,7 @@ def inference(image,
     # flag == 3 no faces
     # flag == 2 some with and some without masks
     # flag == 1 all with masks
-    # flag == 0 all without masks
+    # flag == 0 none with masks
     flag = 3 
     nmasks = 0 # number that are wearing masks
 

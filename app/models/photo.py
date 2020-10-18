@@ -18,7 +18,7 @@ class Photo(db.Model):
     # flag == 3 no faces
     # flag == 2 some with and some without masks
     # flag == 1 all with masks
-    # flag == 0 all without masks
+    # flag == 0 none with masks
     photo_type = Column(Integer)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     user_id = Column(String(255), ForeignKey('md_user.id'))
