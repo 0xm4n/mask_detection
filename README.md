@@ -4,12 +4,15 @@ Mask Detection is a simple web application that uses AI to determine
 whether individuals that show up in a picture are wearing a face mask.
 
 ## Features
+
 - Login panel. With authentication to access to the application. 
 - Password recovery. User can reset his/her password with his/her email address.
 - User management. The administrator is able to create additional user accounts.
 - Permission control. User accounts have access to all features except create/delete user accounts.
-- Mask detections.
-- Upload history.
+- Mask detections. Authenticated users are able to run mask detection on images uploaded from local file system or downloaded from a web URL.
+- Upload history. Authenticated users are able to browse lists of 
+previously uploaded images and their corresponding detection 
+results.
 
 
 ## Dependencies
@@ -24,7 +27,9 @@ MaskDetection is based on Python and depends on the following major components:
 * [Flask-SQLAlchemy](http://flask-sqlalchemy.palletsprojects.com): ORM framework for SQLite
 * [Flask-WTF](https://flask-wtf.readthedocs.io/): A flexible forms validation and rendering library
 * [Flask-Login](https://flask-login.readthedocs.io/): Provides user session management for Flask
-* [Flask-Mail](https://pythonhosted.org/Flask-Mail/): Sends emails to users for password reset.
+* [Flask-Mail](https://pythonhosted.org/Flask-Mail/): Sends emails to users for password reset
+* [PyTorch](https://pytorch.org/): A machine learning framework.
+
 
 The process of installing all these components and setting up a server is described below.
 ## Local Setup
@@ -224,26 +229,7 @@ User account can be delete by Admin(Admin account can not be deleted).
 - [Zhenyi Tang]  zhenyi.tang@mail.utoronto.ca
 - [Ran He]       abby.he@mail.utoronto.ca
 - [Macious Peng] macious.peng@mail.utoronto.ca
+Any discussions, suggestions and questions are welcome!
 
-## License
-MIT License
-Copyright (c) 2020 Zhenyi Tang
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 

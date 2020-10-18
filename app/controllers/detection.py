@@ -75,9 +75,9 @@ def detection_file():
 
     if file_form.validate_on_submit():
         try:
-            file = file_form.photo.data
-            suffix = os.path.splitext(file.filename)[-1]
-            img = file.read()
+            local_file = file_form.photo.data
+            suffix = os.path.splitext(local_file.filename)[-1]
+            img = local_file.read()
             frame = cv2.imdecode(np.fromstring(img, np.uint8), cv2.IMREAD_COLOR)
             
             result_photo = detection(frame, time, suffix)

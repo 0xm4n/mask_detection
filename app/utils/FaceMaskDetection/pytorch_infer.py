@@ -11,9 +11,6 @@ from .utils.nms import single_class_non_max_suppression
 from .load_model.pytorch_loader import load_pytorch_model, pytorch_inference
 
 
-# print("!!!!!!")
-# import os
-# print(os.path.abspath(__file__)) 
 model = load_pytorch_model('./app/utils/FaceMaskDetection/detection_models/model360.pth')
 # anchor configuration
 #feature_map_sizes = [[33, 33], [17, 17], [9, 9], [5, 5], [3, 3]]

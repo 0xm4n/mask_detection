@@ -23,6 +23,7 @@ class UploadFromURL(FlaskForm):
     photo = StringField(
         'Photo',
         validators=[
+            DataRequired(),
             URL()
         ]
     )
