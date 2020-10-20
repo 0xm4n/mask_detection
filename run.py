@@ -1,5 +1,5 @@
-from app import create_app
+from app import app as application
 
-mask_detection = create_app()
-
-mask_detection.run(host='localhost', debug=True)
+if __name__ == '__main__':
+    app = application
+    app.run(host='0.0.0.0', port='5000', debug=False)
