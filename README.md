@@ -43,6 +43,7 @@ The following assumes you have all of the two essential tools listed above insta
 #### 2. Create and initialize virtualenv for the project:
 
     $ virtualenv venv
+    $ source ./venv/bin/activate
     $ pip install -r requirements.txt
 
 #### 3. Run the development server:
